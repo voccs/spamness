@@ -175,11 +175,11 @@
 
       <method name="buildViews">
         <body><![CDATA[
-            this.maxLinesBeforeMore = Application.prefs.getValue(
+            this.maxLinesBeforeMore = Services.prefs.getIntPref(
               "mailnews.headers.show_n_lines_before_more",
               this.maxLinesBeforeMore);
-            const dt = Components.interfaces.nsMimeHeaderDisplayTypes;
-            var headerchoice = Application.prefs.getValue("mail.show_headers",
+            const dt = Ci.nsMimeHeaderDisplayTypes;
+            var headerchoice = Services.prefs.getIntPref("mail.show_headers",
                                                           dt.NormalHeaders);
             if (this.maxLinesBeforeMore < 1 ||
                 headerchoice == dt.AllHeaders) {
