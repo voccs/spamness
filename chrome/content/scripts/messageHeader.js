@@ -1,8 +1,8 @@
 Spamness.Message = {};
 
 Spamness.Message.displayScoreHeader = function() {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                    .getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"]
+                    .getService(Ci.nsIPrefBranch);
     var showScore = prefs.getBoolPref("extensions.spamness.display.messageScore");
     var rowEl = document.getElementById("expandedSpamnessRow");
     var hdrEl = document.getElementById("spamnessScoreHeader");
@@ -31,8 +31,8 @@ Spamness.Message.displayScoreHeader = function() {
 };
 
 Spamness.Message.displayRulesHeader = function() {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                    .getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"]
+                    .getService(Ci.nsIPrefBranch);
     var showRules = prefs.getBoolPref("extensions.spamness.display.messageRules");
     var rowEl = document.getElementById("expandedSpamnessRulesRow");
     var hdrEl = document.getElementById("expandedSpamnessRulesBox");
@@ -72,8 +72,8 @@ Spamness.Message.displayRulesHeader = function() {
 };
 
 Spamness.Message.handleLinkClick = function(e, linkNode) {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                    .getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"]
+                    .getService(Ci.nsIPrefBranch);
     var local = prefs.getBoolPref("extensions.spamness.openRuleLinkLocally");
 
     if (e.button === 0) {
@@ -109,8 +109,8 @@ Spamness.Message.copyLink = function(linkNode) {
 
     var url = linkNode.getAttribute('url');
     var contractid = "@mozilla.org/widget/clipboardhelper;1";
-    var iid = Components.interfaces.nsIClipboardHelper;
-    var clipboard = Components.classes[contractid].getService(iid);
+    var iid = Ci.nsIClipboardHelper;
+    var clipboard = Cc.classes[contractid].getService(iid);
     clipboard.copyString(url);
 };
 

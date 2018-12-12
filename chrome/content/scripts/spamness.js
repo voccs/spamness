@@ -28,8 +28,8 @@ Spamness._getLabel = function(key) {
 
 Spamness.getHeaderName = function(prefs) {
     if (!prefs)
-        prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                    .getService(Components.interfaces.nsIPrefBranch);
+        prefs = Cc["@mozilla.org/preferences-service;1"]
+                    .getService(Ci.nsIPrefBranch);
     var header = prefs.getCharPref("extensions.spamness.header");
     return header;
 };
@@ -98,7 +98,7 @@ Spamness.syncHeaderPrefs = function(prefVal) {
     }
     var prefEl = document.getElementById('headerNameForm');
 
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 
     if (prefVal != Spamness.previousSpamnessHeader) {
 	    if (!isRFC2822Header(prefVal)) {
@@ -109,7 +109,7 @@ Spamness.syncHeaderPrefs = function(prefVal) {
 	        return false;
 	    }
 
-        var nsMsgSearchAttrib = Components.interfaces.nsMsgSearchAttrib;
+        var nsMsgSearchAttrib = Ci.nsMsgSearchAttrib;
         if (Spamness.customHeaders.length + 1 >= (nsMsgSearchAttrib.kNumMsgSearchAttributes - nsMsgSearchAttrib.OtherHeader - 1)) {
 	        var bundle = document.getElementById("bundle_custom");
 	        var alertText = bundle.getString("customHeaderOverflow");
@@ -161,20 +161,20 @@ Spamness.syncHeaderPrefs = function(prefVal) {
     Spamness.previousSpamnessHeader = prefVal;
 
     // flush to disk
-    var prefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+    var prefService = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefService);
     prefService.savePrefFile(null);
     return true;
 };
 
 Spamness.log = function(msg) {
-    var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-        .getService(Components.interfaces.nsIConsoleService);
+    var consoleService = Cc["@mozilla.org/consoleservice;1"]
+        .getService(Ci.nsIConsoleService);
     consoleService.logStringMessage(msg);
 };
 
 Spamness.error = function(msg) {
-    var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
-        .getService(Components.interfaces.nsIConsoleService);
+    var consoleService = Cc["@mozilla.org/consoleservice;1"]
+        .getService(Ci.nsIConsoleService);
     consoleService.logStringMessage("ERROR: " + msg);
 };
 
@@ -190,8 +190,8 @@ Spamness.addSpamnessColumn = function() {
 Spamness.openTab = function(url) {
     let tabmail = document.getElementById("tabmail");
     if (!tabmail) {
-        let mail3PaneWindow = Components.classes["@mozilla.org/appshell/window-mediator;1"]
-            .getService(Components.interfaces.nsIWindowMediator)
+        let mail3PaneWindow = Cc["@mozilla.org/appshell/window-mediator;1"]
+            .getService(Ci.nsIWindowMediator)
             .getMostRecentWindow("mail:3pane");
         if (mail3PaneWindow) {
             tabmail = mail3PaneWindow.document.getElementById("tabmail");

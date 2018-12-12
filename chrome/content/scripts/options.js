@@ -1,7 +1,7 @@
 var SpamnessOptions = {};
 
 SpamnessOptions.onLoad = function() {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
     if (prefs.getBoolPref("browser.preferences.instantApply")) {
         document.getElementById('headerNameForm').addEventListener('blur', SpamnessOptions.syncHeaderPrefs, true);
     }
@@ -10,7 +10,7 @@ SpamnessOptions.onLoad = function() {
 };
 
 SpamnessOptions.syncHeaderPrefs = function(evt) {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
     return Spamness.syncHeaderPrefs(null);
 };
 

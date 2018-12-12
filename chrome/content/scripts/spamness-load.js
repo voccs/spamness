@@ -1,5 +1,5 @@
 Spamness.onLoad = function() {
-    var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+    var prefs = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 
     Spamness.previousSpamnessHeader = Spamness.getHeaderName(prefs);
 

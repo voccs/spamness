@@ -2,8 +2,8 @@ var SpamnessColumn = {};
 
 SpamnessColumn.handler = {
     getCellText:         function(row, col) {
-        var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                        .getService(Components.interfaces.nsIPrefBranch);
+        var prefs = Cc["@mozilla.org/preferences-service;1"]
+                        .getService(Ci.nsIPrefBranch);
         var showText = prefs.getIntPref("extensions.spamness.display.column");
 
 	if (showText == Spamness.settings.COLUMN_SHOW_IMAGE_NO_TEXT.value)
@@ -28,8 +28,8 @@ SpamnessColumn.handler = {
     getRowProperties:    function(row, props) {},
 
     getImageSrc:         function(row, col) {
-        var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                        .getService(Components.interfaces.nsIPrefBranch);
+        var prefs = Cc["@mozilla.org/preferences-service;1"]
+                        .getService(Ci.nsIPrefBranch);
         var showImage = prefs.getIntPref("extensions.spamness.display.column");
 
 	if (showImage == Spamness.settings.COLUMN_NO_IMAGE_SHOW_TEXT.value)
@@ -54,8 +54,8 @@ SpamnessColumn.handler = {
     },
 
     getSortLongForRow:   function(hdr) {
-        var prefs = Components.classes["@mozilla.org/preferences-service;1"]
-                        .getService(Components.interfaces.nsIPrefBranch);
+        var prefs = Cc["@mozilla.org/preferences-service;1"]
+                        .getService(Ci.nsIPrefBranch);
         var header = Spamness.getHeaderName(prefs);
         var spamreport = hdr.getStringProperty(header);
 	if (spamreport != null) {
@@ -69,7 +69,7 @@ SpamnessColumn.handler = {
 };
 
 SpamnessColumn.onLoad = function() {
-    var ObserverService = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+    var ObserverService = Cc["@mozilla.org/observer-service;1"].getService(Ci.nsIObserverService);
     ObserverService.addObserver(SpamnessColumn.dbObserver, "MsgCreateDBView", false);
 };
 
